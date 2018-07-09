@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+    "fmt"
+    "reflect"
+)
 
 
 type Node struct{
@@ -94,38 +97,48 @@ func (list *LinkedList)insertAfter(prev_node *Node, value int){
     prev_node.next = new_node
 }
 
-func (list *LinkedList)reverse(){
-    var prev *Node = nil
-    curr := list.head
+func (list *LinkedList)isLoop() bool {
+    slowNode := list.head
+    fastNode := list.head
 
-    for curr != nil {
-        next := curr.next
-        curr.next = prev
-        prev = curr
-        curr = next
+
+    for slowNode != nil && fastNode != nil && fastNode.next != nil{
+        fmt.Printf("fastNode: %p\n", fastNode)
+        fmt.Printf("slowNode: %p\n", slowNode)
+        slowNode = slowNode.next
+        fastNode = fastNode.next.next
+        if fastNode == slowNode {
+            return true
+        }
     }
-    list.head = prev
 
+    return false
 }
+
 
 
 func main(){
 
     list := &LinkedList{}
 
+    list.append(1)
+
     list.append(2)
 
     list.append(3)
 
-    list.push(-1)
+    list.append(4)
+
+    list.append(5)
 
     printList(list)
-    list.insertAfter(list.head.next, 0)
 
-    printList(list)
+    list.head.next.next.next.next.next = list.head.next.next
 
-    list.reverse()
-    printList(list)
+    fmt.Printf("%t \n",list.isLoop())
+
+
+    fmt.Println(reflect.TypeOf(true))
 
     return
 }
