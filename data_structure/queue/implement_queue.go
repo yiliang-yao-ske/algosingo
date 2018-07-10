@@ -2,7 +2,7 @@ package main
 
 import (
     "fmt"
-
+    "math"
 )
 
 type Queue struct{
@@ -45,6 +45,18 @@ func (queue *Queue)enqueue(item int){
     fmt.Println(item, " enqueued to queue")
 }
 
+func (queue *Queue)dequeue()(item int){
+    if queue.isEmpty(){
+        fmt.Println("queue is empty")
+        return math.MinInt16
+    }
+    item = (*queue.array)[queue.front] % queue.capacity
+    queue.front += 1
+    queue.size -= 1
+    return item
+
+}
+
 
 func main(){
 
@@ -53,5 +65,15 @@ func main(){
     fmt.Printf("Create queue at: %p\n", queue)
 
     fmt.Printf("At the beginning, the queue is empty %t\n", queue.isEmpty())
+
+
+    queue.enqueue(1)
+    queue.enqueue(2)
+    queue.enqueue(3)
+    fmt.Printf("%d\n",queue.dequeue())
+    fmt.Printf("%d\n",queue.dequeue())
+    fmt.Printf("%d\n",queue.dequeue())
+    fmt.Printf("%d\n",queue.dequeue())
+    fmt.Printf("%d\n",queue.dequeue())
 
 }
