@@ -1,33 +1,46 @@
 package main
 
-
 import (
-    "fmt"
+	"fmt"
 )
+/* 
+	Interface for binary tree in go
+-------------------------------------
 
-type Tree interface{
-//    getElem()
-//    setElem()
-//    getParent()
-//    getFirstChild()
-//    getNextSibling()
-//    getSize()
-//    getHeight()
-    getDepth()
-}
+	1) getHeight
+	2) getSize
+	3) #printPreorder
+	4) #printPostorder
+	5) printInorder
 
+
+
+
+*/
 
 type Node struct{
-    data int
-    left *Node
-    right *Node
+	data int
+	left *Node
+	right *Node
 }
 
-func (node *Node)getDepth() int{
+func newNode(data int) (node *Node){
+
+	return &Node{
+			data : data,
+			left : nil,
+			right: nil,
+		}
+
+}
+
+
+
+func (node *Node)getHeight() int{
     if node == nil{return 0}
 
-    lDepth := node.left.getDepth()
-    rDepth := node.right.getDepth()
+    lDepth := node.left.getHeight()
+    rDepth := node.right.getHeight()
     if lDepth > rDepth{
         return lDepth + 1
     }else{
@@ -36,44 +49,38 @@ func (node *Node)getDepth() int{
 }
 
 
+func (node *Node)getSize() int{
+	// return nodes number include root
+	if node == nil { return 0 }
 
-func maxDepth(node *Node) int{
+	lSize := node.left.getSize()
+	rSize := node.right.getSize()
 
-    if node == nil {
-        return 0
-    }
-
-    lDepth := maxDepth(node.left)
-    rDepth := maxDepth(node.right)
-    if lDepth > rDepth{
-        return lDepth + 1
-    }else{
-        return rDepth +1
-    }
+	return lSize + rSize + 1
 
 }
 
 
+func main() {
+	
+	root := newNode(1)
 
-func newNode (data int) (node *Node){
-    return &Node{
-        data  : data,
-        left  : nil,
-        right : nil,
-    }
-}
+	fmt.Println("root value: ", root.data)
+
+	root.left = newNode(2)
+	root.right = newNode(3)
+
+	root.left.left = newNode(4)
+
+	root.right.left = newNode(6)
+
+	fmt.Println("root.left value: ", root.left.data)
+	fmt.Println("root.left.left value: ", root.left.left.data)
 
 
-func main(){
-    root := newNode(1)
-    root.left = newNode(2)
-    root.right = newNode(3)
-    root.left.left = newNode(4)
-    root.left.right = newNode(5)
-    root.left.right.left = newNode(6)
+	fmt.Println("root Height: ", root.getHeight())
 
-    fmt.Println(root.data)
-    //fmt.Println(maxDepth(root))
-    fmt.Println("depth :",root.getDepth())
+	fmt.Println("root Size: ", root.getSize())	
 
+	return
 }
