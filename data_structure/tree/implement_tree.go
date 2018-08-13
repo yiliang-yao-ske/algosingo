@@ -61,6 +61,30 @@ func (node *Node)getSize() int{
 }
 
 
+
+func (root *Node)printLevelorder(){
+
+    h := root.getHeight()
+    var i int
+    for i=1; i <= h; i++ {
+    	printGivenLevel(root, i)
+    }
+
+}
+
+func printGivenLevel(node *Node, level int){
+	if node == nil{return}
+	
+	if level == 1 {
+		fmt.Println(node.data)
+	}else if (level > 1){
+		printGivenLevel(node.left, level-1)
+		printGivenLevel(node.right, level-1)
+	}
+}
+
+
+
 func main() {
 	
 	root := newNode(1)
@@ -81,6 +105,8 @@ func main() {
 	fmt.Println("root Height: ", root.getHeight())
 
 	fmt.Println("root Size: ", root.getSize())	
+
+	root.printLevelorder()
 
 	return
 }

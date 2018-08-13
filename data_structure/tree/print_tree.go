@@ -65,6 +65,11 @@ func (node *Node)printPostorder(){
 }
 
 
+func (node *Node)printLevelorder(){
+
+    h := node.height()
+
+}
 
 func main(){
     root := newNode(1)
