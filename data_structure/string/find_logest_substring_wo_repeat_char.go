@@ -36,8 +36,8 @@ func findLongestSubstring(s string)(find_s string){
 
     for i = 1; i < n; i++ {
         _, is_exist := pos[string(s[i])]
-        fmt.Println(is_exist)
-        fmt.Println(pos)
+        //fmt.Println(is_exist)
+        //fmt.Println(pos)
         if !is_exist {
             pos[string(s[i])] = i
         }else{
@@ -61,8 +61,8 @@ func findLongestSubstring(s string)(find_s string){
         start = st
     }
 
-    fmt.Println(start)
-    fmt.Println(maxlen)
+    //fmt.Println(start)
+    //fmt.Println(maxlen)
     return s[start:start+maxlen]
 
 }

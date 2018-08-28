@@ -9,18 +9,6 @@ import (
 
 func main(){
 
-//    rp, _ := io.Pipe()
-//    //fmt.Println(rp)
-//
-//    data := make([]byte, 64)
-//    n, err := rp.Read(data)
-//
-//    if nil != err {
-//        fmt.Println(err)
-//    }
-//
-//    fmt.Println("data", n , string(data))
-
     reader := bufio.NewReader(os.Stdin)
 
 
@@ -36,5 +24,6 @@ func main(){
 
     fmt.Printf("%s\n", string(data[6]))
 
+    // simple_print < tiny.txt
 }
 
