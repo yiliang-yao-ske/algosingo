@@ -4,17 +4,17 @@ import (
 	"fmt"
 )
 
-func binarySearch(arr *[]int, l, r, x int) int{
-	if (r >= l){
-		mid := l + (r -1) /2
+func binarySearch(arr *[]int, left, right, x int) int{
+	if ( right >= left){
+		mid := left + ( right -1) /2
 
 		if((*arr)[mid] == x){
 			return mid
 		}
 		if((*arr)[mid] > x){
-			return binarySearch(arr, l, mid-1, x)
+			return binarySearch(arr, left, mid-1, x)
 		}
-		return binarySearch(arr, mid+1, r, x)
+		return binarySearch(arr, mid+1,  right, x)
 	}
 	return -1
 }
